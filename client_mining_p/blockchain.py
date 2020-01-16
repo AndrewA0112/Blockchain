@@ -131,6 +131,11 @@ def mine():
     # previous_hash = blockchain.hash(blockchain.last_block)
     # block = blockchain.new_block(proof, previous_hash)
     values = request.get_json()
+    req = ['proof', 'id']
+    if not all (k in values for k in req)
+        response = {'message': 'Missing Values'}
+        return jsonify(response), 400
+
     last_block_string = json.dumps(blockchain.last_block, sort_keys=True)
     if blockchain.valid_proof(last_block_string, values['proof']):
         prev_hash = blockchain.hash(blockchain.last_block)
